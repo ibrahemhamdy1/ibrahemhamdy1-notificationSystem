@@ -10,4 +10,14 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    /**
+     * Add the users relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
