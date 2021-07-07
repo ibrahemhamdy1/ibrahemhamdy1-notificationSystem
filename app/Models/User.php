@@ -60,5 +60,5 @@ class User extends Authenticatable
     public function routeNotificationForNexmo($notification)
     {
         return config('services.nexmo.sms_from');
-    }G
+    }
 }
