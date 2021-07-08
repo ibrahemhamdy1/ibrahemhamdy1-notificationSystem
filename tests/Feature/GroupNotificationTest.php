@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Group;
 
 class GroupNotificationTest extends TestCase
 {
@@ -13,7 +14,8 @@ class GroupNotificationTest extends TestCase
      */
     public function testTheGroupSendNotificationFunctionality()
     {
-        $response = $this->post('api/send/group/notification/1', [
+        $group = Group::first();
+        $response = $this->post("api/v1/send/group/{$group->id}/notification", [
             'content' => 'Php new message',
         ]);
 
@@ -27,7 +29,7 @@ class GroupNotificationTest extends TestCase
      */
     public function testTheWrongGroupSendNotificationFunctionality()
     {
-        $response = $this->post('api/send/group/notification/11111111111111213223', [
+        $response = $this->post('api/v1/send/group/11111111111111213223/notification', [
             'content' => 'Php new message',
         ]);
 

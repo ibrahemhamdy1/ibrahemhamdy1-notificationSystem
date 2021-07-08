@@ -20,6 +20,7 @@ use App\Http\Controllers\SendGroupNotificationsController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-route::post('send/group/notification/{group}', [SendGroupNotificationsController::class, 'store'])->name('send.group.notification');
-route::post('send/user/notification/{user}', [SendUserNotificationsController::class, 'store'])->name('send.user.notification');
+Route::prefix('v1')->group(function () {
+    route::post('send/group/{group}/notification', [SendGroupNotificationsController::class, 'store'])->name('send.group.notification');
+    route::post('send/user/{user}/notification', [SendUserNotificationsController::class, 'store'])->name('send.user.notification');
+});

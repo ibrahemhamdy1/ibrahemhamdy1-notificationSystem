@@ -3,6 +3,7 @@
 namespace Tests\FeatureG;
 
 use Tests\TestCase;
+use App\Models\User;
 
 class UserNotificationTest extends TestCase
 {
@@ -13,7 +14,8 @@ class UserNotificationTest extends TestCase
      */
     public function testTheUserSendNotificationFunctionality()
     {
-        $response = $this->post('api/send/user/notification/1', [
+        $user = User::first();
+        $response = $this->post("api/v1/send/user/{$user->id}/notification/", [
             'content' => 'Php new message',
         ]);
 
@@ -27,7 +29,7 @@ class UserNotificationTest extends TestCase
      */
     public function testTheWrongUserSendNotificationFunctionality()
     {
-        $response = $this->post('api/send/user/notification/11111111111111213223', [
+        $response = $this->post('api/v1/send/user/11111111111111213223/notification', [
             'content' => 'Php new message',
         ]);
 
